@@ -1,0 +1,101 @@
+﻿@model WebApp.Entities.Post
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Post Details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Likes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Likes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+    </dl>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments[0].PostId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments[0].UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments[0].CreatedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments[0].Likes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments[0].Body)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var com in Model.Comments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => com.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => com.PostId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => com.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => com.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => com.Likes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => com.Body)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

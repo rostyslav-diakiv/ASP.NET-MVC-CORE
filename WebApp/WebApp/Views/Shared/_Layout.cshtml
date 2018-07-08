@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var parms = new Dictionary<string, string>
+                    {
+                        { "userId", "1" },
+                    };
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -30,9 +37,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Posts" asp-action="Index" asp-all-route-data="parms">Posts</a></li> @*Standard 1st user showing*@
                 </ul>
             </div>
         </div>

@@ -5,26 +5,27 @@ namespace WebApp.Services
 {
     using System.Linq;
 
+    using WebApp.Dtos;
     using WebApp.Entities;
     using WebApp.Interfaces;
     using WebApp.Models;
 
     public class QueryService : IQueryService
     {
-        private readonly IEnumerable<IUser> _users;
-        public QueryService() { }
+        private readonly IDataManager _dataManager;
 
-        public QueryService(IEnumerable<IUser> dataSource)
+        public QueryService(IDataManager dataManager)
         {
-            _users = new List<IUser>(dataSource);
+            _dataManager = dataManager;
         }
 
         #region Query #1 +
-        public (IEnumerable<(IPost post, int commentsAmount)> posts, int userId) GetUserPostsCommentsNumber(int userId)
+        public UserPostComments GetUserPostsCommentsNumber(int userId)
         {
-            var postWithNumberOfItsCommetns = _users.FirstOrDefault(u => u.Id == userId)
+            var postWithNumberOfItsCommetns = _dataManager.Users.FirstOrDefault(u => u.Id == userId)
                                                     ?.Posts.Select(p => (p, p.Comments.Count));
-            return (postWithNumberOfItsCommetns, userId);
+
+            return new UserPostComments(userId, postWithNumberOfItsCommetns); // (postWithNumberOfItsCommetns, userId);
         }
 
         public void ShowUserPostsCommentsNumber(IEnumerable<(IPost post, int commentsAmount)> posts, int userId)
@@ -41,12 +42,34 @@ namespace WebApp.Services
                 Console.WriteLine($"{p}, comments amount: {p.commentsAmount}");
             }
         }
+
+        public Post GetPostById(int? id)
+        {
+            var post = _dataManager.Users.SelectMany(u => u.Posts.Where(p => p.Id == id)).FirstOrDefault();
+
+            return post as Post;
+        }
+
+        public TodoModel GetTodoById(int? id)
+        {
+            var todo = _dataManager.Users.SelectMany(u => u.TodoModels.Where(p => p.Id == id)).FirstOrDefault();
+
+            return todo as TodoModel;
+        }
+        
+        public User GetUserById(int? id)
+        {
+            var user = _dataManager.Users.FirstOrDefault(u => u.Id == id);
+
+            return user as User;
+        }
+
         #endregion
 
         #region Query #2 +
         public (IEnumerable<ICommentModel> comments, int userId) GetUserPostsComments(int userId)
         {
-            var comments = _users.FirstOrDefault(u => u.Id == userId)
+            var comments = _dataManager.Users.FirstOrDefault(u => u.Id == userId)
                                  ?.Posts.SelectMany(p => p.Comments.Where(c => c.Body.Length < 50));
 
             return (comments, userId);
@@ -71,7 +94,7 @@ namespace WebApp.Services
         #region Query #3 +
         public (IEnumerable<(int id, string name)> todos, int userId) GetUserCompletedTodos(int userId)
         {
-            var doneTodosForUserById = _users.FirstOrDefault(u => u.Id == userId)
+            var doneTodosForUserById = _dataManager.Users.FirstOrDefault(u => u.Id == userId)
                                              ?.TodoModels.Where(t => t.IsComplete)
                                                          .Select(t => (Id: t.Id, Name: t.Name));
             return (doneTodosForUserById, userId);
@@ -94,9 +117,10 @@ namespace WebApp.Services
         #endregion
 
         #region Query #4 + 
+        // Get Users with Todos
         public IEnumerable<IUser> Query4()
         {
-            var sortedUsers = _users.OrderBy(u => u.Name)
+            var sortedUsers = _dataManager.Users.OrderBy(u => u.Name)
                                     .Select(u => new User(u, u.TodoModels.OrderByDescending(t => t.Name.Length)));
             return sortedUsers;
         }
@@ -125,7 +149,7 @@ namespace WebApp.Services
         #region Query #5 +
         public (IUser user, IPost lastPost, int? lastPostCommentsAmount, int uncompletedTasksAmount, IPost popPost, IPost popPostLikes) Query5(int userId)
         {
-            var tuple = (from u in _users
+            var tuple = (from u in _dataManager.Users
                          where u.Id == userId
                          select (u, // User 
                                  u.Posts.OrderByDescending(p => p.CreatedAt).FirstOrDefault(),
@@ -157,7 +181,7 @@ namespace WebApp.Services
         #region Query #6 +
         public (IPost post, ICommentModel longestComment, ICommentModel mostPopComment, int commentsAmount) Query6(int postId)
         {
-            var postData = _users.SelectMany(u => u.Posts.Where(p => p.Id == postId)).Select(po => (po,
+            var postData = _dataManager.Users.SelectMany(u => u.Posts.Where(p => p.Id == postId)).Select(po => (po,
                                                                                                        po.Comments.OrderByDescending(c => c.Body.Length).FirstOrDefault(),
                                                                                                        po.Comments.OrderByDescending(c => c.Likes).FirstOrDefault(),
                                                                                                        po.Comments.Count(cm => cm.Likes == 0 || cm.Body.Length < 80))).FirstOrDefault();

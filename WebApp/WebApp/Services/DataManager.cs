@@ -10,17 +10,20 @@
 
     using WebApp.Entities;
     using WebApp.Interfaces;
+    using WebApp.Models;
 
     public class DataManager : IDataManager
     {
-        public async Task<IEnumerable<IUser>> PrepareDataForQuerying()
+        public List<IUser> Users { get; }
+
+        public DataManager()
         {
-            var data = await FetchDataFromApi().ConfigureAwait(false);
+            var data = FetchDataFromApi().Result;
             var users = CombineData(data);
-            return users;
+            Users = users.ToList();
         }
 
-        private async Task<(List<IUserModel> userModels, List<IPostModel> postModels, List<ICommentModel> commentModels, List<ITodoModel> todoModels)> FetchDataFromApi()
+        private async Task<(List<UserModel> userModels, List<PostModel> postModels, List<CommentModel> commentModels, List<TodoModel> todoModels)> FetchDataFromApi()
         {
             // Fetch and Join data
             using (var handler = new HttpClientHandler())
@@ -45,16 +48,16 @@
 
                 await Task.WhenAll(readTasks).ConfigureAwait(false);
 
-                var userModels = JsonConvert.DeserializeObject<List<IUserModel>>(readUsersTask.Result);
-                var postModels = JsonConvert.DeserializeObject<List<IPostModel>>(readPostsTask.Result);
-                var commentModels = JsonConvert.DeserializeObject<List<ICommentModel>>(readCommentsTask.Result);
-                var todoModels = JsonConvert.DeserializeObject<List<ITodoModel>>(readTodosTask.Result);
+                var userModels = JsonConvert.DeserializeObject<List<UserModel>>(readUsersTask.Result);
+                var postModels = JsonConvert.DeserializeObject<List<PostModel>>(readPostsTask.Result);
+                var commentModels = JsonConvert.DeserializeObject<List<CommentModel>>(readCommentsTask.Result);
+                var todoModels = JsonConvert.DeserializeObject<List<TodoModel>>(readTodosTask.Result);
 
                 return (userModels, postModels, commentModels, todoModels);
             }
         }
 
-        private IEnumerable<IUser> CombineData((List<IUserModel> userModels, List<IPostModel> postModels, List<ICommentModel> commentModels, List<ITodoModel> todoModels) dataToCombine)
+        private IEnumerable<IUser> CombineData((List<UserModel> userModels, List<PostModel> postModels, List<CommentModel> commentModels, List<TodoModel> todoModels) dataToCombine)
         {
             var users = from um in dataToCombine.userModels
                         join p in (from pm in dataToCombine.postModels

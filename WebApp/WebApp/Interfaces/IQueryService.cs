@@ -2,11 +2,15 @@
 
 namespace WebApp.Interfaces
 {
+    using WebApp.Dtos;
+    using WebApp.Entities;
+    using WebApp.Models;
+
     public interface IQueryService
     {
         (IEnumerable<(int id, string name)> todos, int userId) GetUserCompletedTodos(int userId);
         (IEnumerable<ICommentModel> comments, int userId) GetUserPostsComments(int userId);
-        (IEnumerable<(IPost post, int commentsAmount)> posts, int userId) GetUserPostsCommentsNumber(int userId);
+        UserPostComments GetUserPostsCommentsNumber(int userId);
         IEnumerable<IUser> Query4();
         (IUser user, IPost lastPost, int? lastPostCommentsAmount, int uncompletedTasksAmount, IPost popPost, IPost popPostLikes) Query5(int userId);
         (IPost post, ICommentModel longestComment, ICommentModel mostPopComment, int commentsAmount) Query6(int postId);
@@ -16,5 +20,11 @@ namespace WebApp.Interfaces
         void ShowUserCompletedTodos(IEnumerable<(int id, string name)> completedTodos, int userId);
         void ShowUserPostsComments(IEnumerable<ICommentModel> comments, int userId);
         void ShowUserPostsCommentsNumber(IEnumerable<(IPost post, int commentsAmount)> posts, int userId);
+
+        Post GetPostById(int? id);
+
+        TodoModel GetTodoById(int? id);
+
+        User GetUserById(int? id);
     }
 }

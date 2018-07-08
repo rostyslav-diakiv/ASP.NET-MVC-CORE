@@ -6,21 +6,11 @@ namespace WebApp.Services
 
     using WebApp.Interfaces;
 
-    public class Menu : IMenu
+    public class Menu
     {
         private IQueryService _queryService;
 
         private readonly string separator = new string('-', 140);
-
-        public Menu() { }
-
-        public async Task SetUp()
-        {
-            var dataManager = new DataManager();
-            var users = await dataManager.PrepareDataForQuerying().ConfigureAwait(false);
-
-            _queryService = new QueryService(users);
-        }
 
         public void Start(bool showMenu)
         {
@@ -41,7 +31,7 @@ namespace WebApp.Services
                     {
                         // 1
                         var postsWithUserId = _queryService.GetUserPostsCommentsNumber(id); // 24
-                        _queryService.ShowUserPostsCommentsNumber(postsWithUserId.posts, postsWithUserId.userId);
+                        // _queryService.ShowUserPostsCommentsNumber(postsWithUserId.posts, postsWithUserId.userId);
                         
                         Console.WriteLine(separator);
                     }

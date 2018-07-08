@@ -7,7 +7,7 @@
 
     public class Post : PostModel, IPost
     {
-        public Post() { }
+        public Post(): base() { }
 
         public Post(IPostModel postModel, IEnumerable<ICommentModel> comments) : base(postModel)
         {
