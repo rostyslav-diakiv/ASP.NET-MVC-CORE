@@ -28,7 +28,9 @@
                     <a asp-controller="Todos" asp-action="Details" asp-route-id="@t.Id">@Html.DisplayFor(modelItem => t.Name)</a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => t.Name)
+                    <a href="#">
+                        @Html.DisplayFor(modelItem => t.Name)
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => t.CreatedAt)

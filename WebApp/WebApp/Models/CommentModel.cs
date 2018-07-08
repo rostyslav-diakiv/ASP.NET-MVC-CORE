@@ -2,6 +2,8 @@
 
 namespace WebApp.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     using WebApp.Entities;
     using WebApp.Interfaces;
 
@@ -12,15 +14,18 @@ namespace WebApp.Models
 
         public int Id { get; set; }
 
+        [Display(Name = "Post id")]
         public int PostId { get; set; }
         public Post Post { get; set; }
 
         public int UserId { get; set; }
-
         public User User { get; set; }
 
+        [Display(Name = "Written at")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss tt}")]
         public DateTime CreatedAt { get; set; }
 
+        [Display(Name = "Text")]
         public string Body { get; set; }
 
         public int Likes { get; set; }

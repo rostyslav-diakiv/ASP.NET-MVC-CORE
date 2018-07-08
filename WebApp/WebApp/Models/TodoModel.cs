@@ -2,6 +2,8 @@
 
 namespace WebApp.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     using WebApp.Entities;
     using WebApp.Interfaces;
 
@@ -11,10 +13,13 @@ namespace WebApp.Models
 
         public int Id { get; set; }
 
+        [Display(Name = "Owner id")]
         public int UserId { get; set; }
 
         public User User { get; set; }
 
+        [Display(Name = "Created at")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm tt}")]
         public DateTime CreatedAt { get; set; }
 
         public string Name { get; set; }

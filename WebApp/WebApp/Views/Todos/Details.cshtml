@@ -21,7 +21,9 @@
             @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            <a href="#">        
+                @Html.DisplayFor(model => model.Name)
+            </a>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.CreatedAt)
@@ -39,7 +41,9 @@
             @Html.DisplayNameFor(model => model.User.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.User.Name)
+            <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.UserId">
+                @Html.DisplayFor(model => model.User.Name)
+            </a>
         </dd>
     </dl>
 </div>

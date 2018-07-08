@@ -1,6 +1,7 @@
 ﻿namespace WebApp.Entities
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using WebApp.Interfaces;
     using WebApp.Models;
@@ -13,9 +14,10 @@
         {
             Comments = new List<CommentModel>(comments);
         }
-
+        
         public List<CommentModel> Comments { get; set; }
 
+        [Display(Name = "Author")]
         public User User { get; set; }
 
         /// <summary>Returns a string that represents the current object.</summary>

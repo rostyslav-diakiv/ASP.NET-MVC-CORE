@@ -73,7 +73,7 @@
             {
                 <tr class="collapse" id='@string.Format("collapseComm{0}", p.Id)'>
                     <td colspan="5">
-                        @Html.RenderPartialAsync("Partials/CommentListPartial", p.Comments)
+                        @Html.Partial("Partials/CommentListPartial", p.Comments)
                     </td>
                 </tr>
             }

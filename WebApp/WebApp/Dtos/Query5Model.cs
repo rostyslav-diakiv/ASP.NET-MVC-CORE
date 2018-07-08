@@ -1,5 +1,7 @@
 ﻿namespace WebApp.Dtos
 {
+    using System.ComponentModel.DataAnnotations;
+
     using WebApp.Entities;
 
     public class Query5Model
@@ -15,10 +17,20 @@
         }
 
         public User User { get; set; }
+
+        [Display(Name = "Last Post")]
         public Post LastPost { get; set; }
+
+        [Display(Name = "Comments below Last Post")]
         public int? LastPostCommentsAmount { get; set; }
+
+        [Display(Name = "Amount of uncompleted Todos")]
         public int UncompletedTasksAmount { get; set; }
+
+        [Display(Name = "The most popular post")]
         public Post MostPopularPost { get; set; }
+
+        [Display(Name = "The most popular post (Likes)")]
         public Post MostPopularPostLikes { get; set; }
     }
 }

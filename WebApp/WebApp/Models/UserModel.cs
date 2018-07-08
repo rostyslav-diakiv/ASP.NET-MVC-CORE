@@ -20,13 +20,18 @@
 
         public int Id { get; set; }
 
+        [Display(Name = "Registration Date")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm tt}")]
         public DateTime CreatedAt { get; set; }
 
+        [Display(Name = "Full Name")]
         public string Name { get; set; }
 
+        [Display(Name = "Email Address")]
         [EmailAddress]
         public string Email { get; set; }
 
+        [Display(Name = "Avatar")]
         public Uri Avatar { get; set; }
     }
 }

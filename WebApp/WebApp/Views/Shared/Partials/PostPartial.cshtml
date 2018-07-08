@@ -14,7 +14,9 @@
             @Html.DisplayNameFor(model => model.Title)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Title)
+            <a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.Id">
+                @Html.DisplayFor(model => model.Title)
+            </a>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Likes)
@@ -35,12 +37,14 @@
             @Html.DisplayFor(model => model.Body)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.UserId)
+            @Html.DisplayNameFor(model => model.User.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.UserId)
+            <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.UserId">
+                @Html.DisplayFor(modelItem => Model.User.Name)
+            </a>
         </dd>
     </dl>
-    
-    @Html.Partial("CommentListPartial", Model.Comments)
+
+    @Html.Partial("Partials/CommentListPartial", Model.Comments)
 </div>
