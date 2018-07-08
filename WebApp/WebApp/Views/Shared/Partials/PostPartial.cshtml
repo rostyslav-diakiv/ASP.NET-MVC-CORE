@@ -1,48 +1,43 @@
 ﻿@model WebApp.Entities.Post
 
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            <a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.Id">
-                @Html.DisplayFor(model => model.Title)
-            </a>
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Likes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Likes)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Name)
-        </dt>
-        <dd>
-            <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.UserId">
-                @Html.DisplayFor(modelItem => Model.User.Name)
-            </a>
-        </dd>
-    </dl>
 
-    @Html.Partial("Partials/CommentListPartial", Model.Comments)
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.Id): @Html.DisplayFor(model => model.Id)
+            </div>
+
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.Title):
+                <a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.Id">
+                    @Html.DisplayFor(model => model.Title)
+                </a>
+            </div>
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.Likes): @Html.DisplayFor(model => model.Likes)
+            </div>
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.CreatedAt): @Html.DisplayFor(model => model.CreatedAt)
+            </div>
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.Body): @Html.DisplayFor(model => model.Body)
+            </div>
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.User.Name):
+                <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.UserId">
+                    @Html.DisplayFor(modelItem => Model.User.Name)
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.Comments.Any())
+        {
+            <div>
+                @Html.Partial("Partials/CommentListPartial", Model.Comments)
+            </div>
+        }
+    </div>
 </div>

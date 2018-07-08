@@ -11,47 +11,46 @@
     <div class="row">
         <div class="col-md-4">
             <h4>TodoModel</h4>
-            <hr/>
+            <hr />
         </div>
     </div>
     
-    <div class="col-md-3">
-        <div class="text-info"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.Id): @Html.DisplayFor(model => model.Id)
+            </div>
+
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.Name):
+                <a href="#">
+                    @Html.DisplayFor(model => model.Name)
+                </a>
+            </div>
+
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.CreatedAt): @Html.DisplayFor(model => model.CreatedAt)
+            </div>
+
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.IsComplete):
+                @if (Model.IsComplete)
+                {
+                    <span>Completed</span>
+                }
+                else
+                {
+                    <span>Not completed</span>
+                }
+            </div>
+
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.User.Name):
+                <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.UserId">
+                    @Html.DisplayFor(model => model.User.Name)
+                </a>
+            </div>
+
+        </div>
     </div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            <a href="#">
-                @Html.DisplayFor(model => model.Name)
-            </a>
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsComplete)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsComplete)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Name)
-        </dt>
-        <dd>
-            <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.UserId">
-                @Html.DisplayFor(model => model.User.Name)
-            </a>
-        </dd>
-    </dl>
 </div>
