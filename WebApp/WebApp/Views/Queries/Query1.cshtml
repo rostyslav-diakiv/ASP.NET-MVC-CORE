@@ -1,20 +1,21 @@
-﻿@model WebApp.Dtos.UserPostComments
+﻿
+@model WebApp.Dtos.UserPostComments
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Query1";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Query #1</h2>
 
 @*<div>
-    @using (Html.BeginForm("Index", "Posts", FormMethod.Get))
-    {
-        @Html.TextBox("userId")
-        <input type="submit" value="User Id" />
-    }
-</div>*@
-<form asp-controller="Posts" asp-action="Index", method="get">
+        @using (Html.BeginForm("Index", "Posts", FormMethod.Get))
+        {
+            @Html.TextBox("userId")
+            <input type="submit" value="User Id" />
+        }
+    </div>*@
+<form asp-controller="Queries" asp-action="Query1" , method="get">
     <p>
         @Html.TextBox("userId")
         @*Title: <input type="number" name="userId">*@
@@ -57,7 +58,7 @@
                     @Html.DisplayFor(modelItem => item.post.Id)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.post.Id">@Html.DisplayFor(modelItem => item.post.Title)</a>
+                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.post.Id">@Html.DisplayFor(modelItem => item.post.Title)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.post.Likes)
@@ -69,7 +70,7 @@
                     @Html.DisplayFor(modelItem => item.post.Body)
                 </td>
                 <td>
-                   @*@Html.ActionLink(@item.comAnount.ToString(), new { @class = "btn btn-primary", datatoggle = "collapse", href = "#collapseExample", role = "button" })*@
+                    @*@Html.ActionLink(@item.comAnount.ToString(), new { @class = "btn btn-primary", datatoggle = "collapse", href = "#collapseExample", role = "button" })*@
                     <a class="btn btn-primary" data-toggle="collapse" href='@string.Format("#collapseComm{0}", item.post.Id)' role="button" aria-expanded="false" aria-controls="collapseExample">
                         @Html.DisplayFor(modelItem => item.comAnount)
                     </a>
@@ -84,11 +85,11 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => item.post.Comments[0].Id) 
+                                    @Html.DisplayNameFor(model => item.post.Comments[0].Id)
                                 </th>
                                 @*<th>
-                                    @Html.DisplayNameFor(model => item.post.Comments[0].PostId)
-                                </th>*@
+                                        @Html.DisplayNameFor(model => item.post.Comments[0].PostId)
+                                    </th>*@
                                 <th>
                                     @Html.DisplayNameFor(model => item.post.Comments[0].UserId)
                                 </th>
@@ -111,8 +112,8 @@
                                         @Html.DisplayFor(m => com.Id)
                                     </td>
                                     @*<td>
-                                        @Html.DisplayFor(modelItem => com.PostId)
-                                    </td>*@
+                                            @Html.DisplayFor(modelItem => com.PostId)
+                                        </td>*@
                                     <td>
                                         <a asp-controller="Users" asp-action="Details" asp-route-id="@com.UserId">@Html.DisplayFor(modelItem => com.UserId)</a>
                                     </td>

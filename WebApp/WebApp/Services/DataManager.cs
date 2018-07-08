@@ -63,11 +63,28 @@
                         join p in (from pm in dataToCombine.postModels
                                 join cm in dataToCombine.commentModels on pm.Id equals cm.PostId into cms
                                 select new Post(pm, cms)) on um.Id equals p.UserId into ps
-                     join tm in dataToCombine.todoModels on um.Id equals tm.UserId into tms
-                     // orderby um.Name
-                     select new User(um, tms, ps);
+                        join tm in dataToCombine.todoModels on um.Id equals tm.UserId into tms
+                        select new User(um, tms, ps);
 
-            return users;
+            var combineData = users.ToList();
+            foreach (var u in combineData)
+            {
+                foreach (var p in u.Posts)
+                {
+                    p.User = u;
+                    foreach (var c in p.Comments)
+                    {
+                        c.Post = p;
+                    }
+                }
+
+                foreach (var t in u.TodoModels)
+                {
+                    t.User = u;
+                }
+            }
+
+            return combineData;
         }
     }
 }

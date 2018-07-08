@@ -2,6 +2,7 @@
 
 namespace WebApp.Models
 {
+    using WebApp.Entities;
     using WebApp.Interfaces;
 
     public class TodoModel : ITodoModel
@@ -11,6 +12,8 @@ namespace WebApp.Models
         public int Id { get; set; }
 
         public int UserId { get; set; }
+
+        public User User { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

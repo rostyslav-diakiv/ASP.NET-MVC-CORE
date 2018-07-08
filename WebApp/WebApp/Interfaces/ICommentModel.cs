@@ -11,6 +11,8 @@ namespace WebApp.Interfaces
         int PostId { get; set; }
         int UserId { get; set; }
 
+        IPost Post { get; set; }
+
         string ToString();
     }
 }

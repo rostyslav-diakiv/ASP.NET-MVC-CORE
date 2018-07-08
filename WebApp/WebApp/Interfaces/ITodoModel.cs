@@ -2,6 +2,8 @@
 
 namespace WebApp.Interfaces
 {
+    using WebApp.Entities;
+
     public interface ITodoModel
     {
         DateTime CreatedAt { get; set; }
@@ -9,6 +11,8 @@ namespace WebApp.Interfaces
         bool IsComplete { get; set; }
         string Name { get; set; }
         int UserId { get; set; }
+
+        User User { get; set; }
 
         string ToString();
     }
