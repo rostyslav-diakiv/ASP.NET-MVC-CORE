@@ -8,10 +8,15 @@
 <h2>Details</h2>
 
 <div class="container">
-    @await Html.PartialAsync("Partials/UserPartial", @Model).ConfigureAwait(false)
+    <div class="row">
+        @Html.Partial("Partials/UserPartial", @Model)
+    </div>
+
+    <div class="row">
+        <div>
+            <a asp-controller="Queries" asp-action="Query4">Go to User List</a>
+        </div>
+    </div>
 </div>
 
 
-<div>
-    <a asp-controller="Queries" asp-action="Query4">Go to User List</a>
-</div>

@@ -17,40 +17,47 @@
             </form>
         </div>
     </div>
-    <div class="row">
-      
-        <div>
-            @if (Model != null)
-            {
+    @if (Model != null)
+    {
+        <div class="row">
+            <h3>Post Id: @Model.Post.Id </h3>
+        </div>
+        <div class="row" style="border: black solid thin">
+            <div>
+                <h2>Post</h2>
+
+                @Html.Partial("Partials/PostPartial", Model.Post)
+            </div>
+        </div>
+        <div class="row" style="border: black solid thin">
+            <div>
+                <h3>
+                    Количество комментов под постом где или 0 лайков или длина текста < 80: @Html.DisplayFor(model => model.CommentsAmount)
+                </h3>
+            </div>
+        </div>
+        if (Model.LongestComment != null)
+        {
+            <div class="row" style="border: grey solid thin">
                 <div>
-                    <h5>User Id: @ViewData["UserId"]</h5>
+                    <h4>The Longest Post's Comment</h4>
+                    @Html.Partial("Partials/CommentPartial", Model.LongestComment)
                 </div>
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-md-3">
-                            @Html.Partial("Partials/PostPartial", Model.Post)
-                        </div>
-                        <div class="col-md-3">
-                            <div class="text-primary">
-                                @Html.DisplayNameFor(model => model.CommentsAmount): @Html.DisplayFor(model => model.CommentsAmount)
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            @Html.Partial("Partials/CommentPartial", Model.LongestComment)
-                        </div>
-                        <div class="col-md-3">
-                            @Html.Partial("Partials/CommentPartial", Model.MostPopularComment)
-                        </div>
-
-                    </div>
+            </div>
+            <div class="row" style="border: black solid thin">
+                <div>
+                    <h4>The Most popular Post's Comment</h4>
+                    @Html.Partial("Partials/CommentPartial", Model.MostPopularComment)
                 </div>
-            }
-            else
-            {
-                <p>User with such Id not Found!</p>
-            }
-        </div>  
-
-    </div>
+            </div>
+        }
+        else
+        {
+            <h5>Post doesn't have any posts</h5>
+        }
+    }
+    else
+    {
+        <p>Post with such Id not Found!</p>
+    }
 </div>

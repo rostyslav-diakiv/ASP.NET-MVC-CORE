@@ -1,40 +1,65 @@
 ﻿@model WebApp.Entities.User
 
-<div>
-    @if (Model != null)
-    {
-        <img src="@Model.Avatar" class="img-rounded" alt="User photo (Avatar)" />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Id)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Id)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd>
-                <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.Id">
-                    @Html.DisplayFor(model => model.Name)
-                </a>
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.CreatedAt)
-            </dd>
-        </dl>
-    }
-    else
-    {
-        <p>User with such Id not Found!</p>
-    }
+<div class="container">
+
+    <div class="row">
+        @if (Model != null)
+        {
+            <div class="col-md-2">
+                <img src="@Model.Avatar" class="img-rounded" alt="User photo (Avatar)" />
+            </div>
+
+            <div class="col-md-3">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Id)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+                    <dd>
+                        <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.Id">
+                            @Html.DisplayFor(model => model.Name)
+                        </a>
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedAt)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedAt)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Posts)
+
+                    </dt>
+                    <dd>
+                        <a asp-controller="Posts" asp-action="Index" asp-route-userid="@Model.Id">
+                            @Html.DisplayFor(model => model.Posts.Count)
+                        </a>
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TodoModels)
+                    </dt>
+                    <dd>
+                        <a asp-controller="Posts" asp-action="Index" asp-route-userid="@Model.Id">
+                            @Html.DisplayFor(model => model.TodoModels.Count)
+                        </a>
+                    </dd>
+                </dl>
+            </div>
+        }
+        else
+        {
+            <p>User with such Id not Found!</p>
+        }
+    </div>
 </div>
