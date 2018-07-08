@@ -2,6 +2,8 @@
 
 namespace WebApp.Controllers
 {
+    using System.Linq;
+
     using WebApp.Interfaces;
 
     public class PostsController : Controller
@@ -13,21 +15,20 @@ namespace WebApp.Controllers
             _queryService = queryService;
         }
 
-        // GET: Posts/Details/5
-        public IActionResult Index(int? id) // userid
+        // GET: Posts/Intex?userid=5
+        public IActionResult Index(string userid) // userid
         {
-            if (id == null)
+            if (int.TryParse(userid, out var id))
             {
-                return NotFound();
+                var posts = _queryService.GetUserPosts(id);
+                if (posts != null && posts.Any())
+                {
+                    ViewData["UserName"] = posts[0].User.Name;
+                    return View(posts);
+                }
             }
 
-            var post = _queryService.GetPostById(id);
-            if (post == null)
-            {
-                return NotFound();
-            }
-
-            return View(post);
+            return View(null);
         }
 
         // GET: Posts/Details/5

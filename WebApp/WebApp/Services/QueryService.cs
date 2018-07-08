@@ -42,6 +42,19 @@ namespace WebApp.Services
             return user;
         }
 
+        public List<Post> GetUserPosts(int userid)
+        {
+            var posts = _dataManager.Users.FirstOrDefault(u => u.Id == userid)?.Posts;
+
+            return posts;
+        }
+
+        public List<TodoModel> GetUserTodos(int userid)
+        {
+            var todos = _dataManager.Users.FirstOrDefault(u => u.Id == userid)?.TodoModels;
+
+            return todos;
+        }
 
         #endregion
 
