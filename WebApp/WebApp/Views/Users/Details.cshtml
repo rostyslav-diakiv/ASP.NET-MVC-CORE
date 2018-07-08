@@ -21,12 +21,6 @@
                 @Html.DisplayFor(model => model.Id)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.CreatedAt)
-            </dd>
-            <dt>
                 @Html.DisplayNameFor(model => model.Name)
             </dt>
             <dd>
@@ -38,6 +32,12 @@
             <dd>
                 @Html.DisplayFor(model => model.Email)
             </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd>
         </dl>
     }
     else
@@ -46,5 +46,5 @@
     }
 </div>
 <div>
-    <a asp-action="Index">Go to User List</a>
+    <a asp-controller="Queries" asp-action="Query4">Go to User List</a>
 </div>

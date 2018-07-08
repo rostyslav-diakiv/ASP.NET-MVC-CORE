@@ -6,15 +6,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Query2</h2>
+<h2>Query #2</h2>
 
 <form asp-controller="Queries" asp-action="Query2" , method="get">
     <p>
         @*User id: <input type="number" name="userId">*@
-        @Html.TextBox("userId")
+        @Html.TextBox("stringId")
         <input type="submit" value="User Id" />
     </p>
 </form>
+
+<h6>@Html.DisplayNameFor(model => model[0].UserId)</h6>
+<h6>@Html.DisplayFor(model => model[0].UserId)</h6>
 
 <table class="table table-striped">
     <thead>
@@ -23,14 +26,10 @@
                 @Html.DisplayNameFor(model => model[0].Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].PostId)
+                @Html.DisplayNameFor(model => model[0].Post.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].UserId)
-            </th>
-            <th>
-                @*// TODO:
-        @Html.DisplayNameFor(model => model[0].User.Name)*@
+                @Html.DisplayNameFor(model => model[0].User.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model[0].CreatedAt)
@@ -51,10 +50,10 @@
                     @Html.DisplayFor(m => com.Id)
                 </td>
                 <td>
-                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@com.PostId">@Html.DisplayFor(modelItem => com.PostId)</a>
+                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@com.PostId">@Html.DisplayFor(modelItem => com.Post.Title)</a>
                 </td>
                 <td>
-                    <a asp-controller="Users" asp-action="Details" asp-route-id="@com.UserId">@Html.DisplayFor(modelItem => com.UserId)</a>
+                    <a asp-controller="Users" asp-action="Details" asp-route-id="@com.UserId">@Html.DisplayFor(modelItem => com.User.Name)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => com.CreatedAt)

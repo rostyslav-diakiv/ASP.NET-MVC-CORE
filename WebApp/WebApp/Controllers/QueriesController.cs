@@ -15,67 +15,65 @@ namespace WebApp.Controllers
             _queryService = queryService;
         }
 
-        public IActionResult Query1(string userId)
+        public IActionResult Query1(string stringId)
         {
-            if (int.TryParse(userId, out var id))
+            if (int.TryParse(stringId, out var id))
             {
-                return View(_queryService.GetUserPostsCommentsNumber(id));
+                var tuples = _queryService.GetUserPostsCommentsNumber(id).ToList();
+                return View(tuples);
             }
 
             return NotFound();
         }
 
-        public IActionResult Query2(string userId)
+        public IActionResult Query2(string stringId)
         {
-            if (int.TryParse(userId, out var id))
+            if (int.TryParse(stringId, out var id))
             {
                 // User' Post's all Comments
                 var comments = _queryService.GetUserPostsComments(id); // 24
-                return View(comments.comments.ToList());
+                return View(comments.ToList());
             }
 
             return NotFound();
         }
 
-        public IActionResult Query3(string userId)
+        public IActionResult Query3(string stringId)
         {
-            if (int.TryParse(userId, out var id))
+            if (int.TryParse(stringId, out var id))
             {
-                return View(_queryService.GetUserPostsCommentsNumber(id));
+                ViewData["UserId"] = id;
 
-            }
-
-            return NotFound();
-        }
-
-        public IActionResult Query4(string userId)
-        {
-            if (int.TryParse(userId, out var id))
-            {
-                return View(_queryService.GetUserPostsCommentsNumber(id));
+                var todos = _queryService.GetUserCompletedTodos(id);
+                return View(todos.ToList());
 
             }
 
             return NotFound();
         }
 
-        public IActionResult Query5(string userId)
+        public IActionResult Query4()
         {
-            if (int.TryParse(userId, out var id))
-            {
-                return View(_queryService.GetUserPostsCommentsNumber(id));
+            return View(_queryService.Query4().ToList());
+        }
 
+        public IActionResult Query5(string stringId)
+        {
+            if (int.TryParse(stringId, out var id))
+            {
+                var model = _queryService.Query5(id);
+                return View(model); // TODO: Add validation for null
             }
 
             return NotFound();
         }
 
-        public IActionResult Query6(string userId)
+        public IActionResult Query6(string stringId)
         {
-            if (int.TryParse(userId, out var id))
+            if (int.TryParse(stringId, out var id))
             {
-                return View(_queryService.GetUserPostsCommentsNumber(id));
-
+                var model = _queryService.Query6(id);
+                return View(model); // TODO: Add validation for null
             }
 
             return NotFound();

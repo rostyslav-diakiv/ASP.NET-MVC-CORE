@@ -4,16 +4,16 @@ namespace WebApp.Controllers
 {
     using WebApp.Interfaces;
 
-    public class PostsController : Controller
+    public class TodosController : Controller
     {
         private readonly IQueryService _queryService;
 
-        public PostsController(IQueryService queryService)
+        public TodosController(IQueryService queryService)
         {
             _queryService = queryService;
         }
 
-        // GET: Posts/Details/5
+        // GET: Todos/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -21,13 +21,13 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            var post = _queryService.GetPostById(id);
-            if (post == null)
+            var todo = _queryService.GetTodoById(id);
+            if (todo == null)
             {
                 return NotFound();
             }
 
-            return View(post);
+            return View(todo);
         }
     }
 }

@@ -1,29 +1,21 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace WebApp.Interfaces
 {
+    using System;
+    using System.Collections.Generic;
+
     using WebApp.Dtos;
     using WebApp.Entities;
     using WebApp.Models;
 
     public interface IQueryService
     {
-        (IEnumerable<(int id, string name)> todos, int userId) GetUserCompletedTodos(int userId);
-        (IEnumerable<CommentModel> comments, int userId) GetUserPostsComments(int userId);
-        UserPostComments GetUserPostsCommentsNumber(int userId);
+        IEnumerable<Tuple<int, string>> GetUserCompletedTodos(int userId);
+        IEnumerable<CommentModel> GetUserPostsComments(int userId);
+        IEnumerable<Tuple<Post, int>> GetUserPostsCommentsNumber(int userId);
         IEnumerable<User> Query4();
-        (User user, Post lastPost, int? lastPostCommentsAmount, int uncompletedTasksAmount, Post popPost, Post popPostLikes) Query5(int userId);
-        (Post post, CommentModel longestComment, CommentModel mostPopComment, int commentsAmount) Query6(int postId);
-        void ShowQuery4(IEnumerable<User> users, int skip = 0, int take = 15);
-        void ShowQuery5(
-            (User user, Post lastPost, int? lastPostCommentsAmount, int uncompletedTasksAmount, Post popPost, Post
-                popPostLikes) complexTuple);
-        void ShowQuery6(
-            (Post post, CommentModel longestComment, CommentModel mostPopComment, int commentsAmount) complexTuple);
-        void ShowUserCompletedTodos(IEnumerable<(int id, string name)> completedTodos, int userId);
-        void ShowUserPostsComments(IEnumerable<CommentModel> comments, int userId);
-        void ShowUserPostsCommentsNumber(IEnumerable<(Post post, int commentsAmount)> posts, int userId);
-
+        Query5Model Query5(int userId);
+        Query6Model Query6(int postId);
         Post GetPostById(int? id);
 
         TodoModel GetTodoById(int? id);
