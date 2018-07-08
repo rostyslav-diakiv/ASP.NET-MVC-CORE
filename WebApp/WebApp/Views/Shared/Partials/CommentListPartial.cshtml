@@ -1,52 +1,58 @@
 ﻿@model List<WebApp.Models.CommentModel>
 
+<div >
+    @*<div class="row">
+        <div>*@
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => @Model[0].Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => @Model[0].Post.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => @Model[0].User.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => @Model[0].CreatedAt)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => @Model[0].Likes)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => @Model[0].Body)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var com in @Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => com.Id)
+                            </td>
+                            <td>
+                                <a asp-controller="Posts" asp-action="Details" asp-route-id="@com.Post.Id">@Html.DisplayFor(modelItem => com.Post.Title)</a>
+                            </td>
+                            <td>
+                                <a asp-controller="Users" asp-action="Details" asp-route-id="@com.UserId">@Html.DisplayFor(modelItem => com.User.Name)</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => com.CreatedAt)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => com.Likes)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => com.Body)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        @*</div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => @Model[0].Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => @Model[0].Post.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => @Model[0].User.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => @Model[0].CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => @Model[0].Likes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => @Model[0].Body)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var com in @Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => com.Id)
-                </td>
-                <td>
-                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@com.Post.Id">@Html.DisplayFor(modelItem => com.Post.Title)</a>
-                </td>
-                <td>
-                    <a asp-controller="Users" asp-action="Details" asp-route-id="@com.UserId">@Html.DisplayFor(modelItem => com.User.Name)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => com.CreatedAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => com.Likes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => com.Body)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    </div>*@
+</div>

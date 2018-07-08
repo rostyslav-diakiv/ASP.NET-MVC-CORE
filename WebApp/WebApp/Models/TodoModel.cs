@@ -24,6 +24,7 @@ namespace WebApp.Models
 
         public string Name { get; set; }
 
+        [Display(Name = "Status")]
         public bool IsComplete { get; set; }
 
         /// <summary>Returns a string that represents the current object.</summary>

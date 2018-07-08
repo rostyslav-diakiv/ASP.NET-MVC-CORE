@@ -1,8 +1,6 @@
 ﻿@model WebApp.Entities.User
 
 <div>
-    <h4>User</h4>
-    <hr />
     @if (Model != null)
     {
         <img src="@Model.Avatar" class="img-rounded" alt="User photo (Avatar)" />
@@ -17,7 +15,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </dt>
             <dd>
-                <a href="#">
+                <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.Id">
                     @Html.DisplayFor(model => model.Name)
                 </a>
             </dd>
