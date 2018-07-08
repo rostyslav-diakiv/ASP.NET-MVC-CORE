@@ -21,5 +21,9 @@ namespace WebApp.Interfaces
         TodoModel GetTodoById(int? id);
 
         User GetUserById(int? id);
+
+        List<Post> GetUserPosts(int userid);
+
+        List<TodoModel> GetUserTodos(int userid);
     }
 }

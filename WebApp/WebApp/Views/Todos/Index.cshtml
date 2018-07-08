@@ -1,4 +1,4 @@
-﻿@model List<WebApp.Entities.Post>
+﻿@model List<TodoModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,14 +9,14 @@
     @if (Model != null)
     {
         <div class="row">
-            Posts of @ViewData["UserName"]
+            Todos of @ViewData["UserName"]
         </div>
         <div class="row">
-            @Html.Partial("Partials/PostListPartial", Model)
+            @Html.Partial("Partials/TodoListPartial", Model)
         </div>
     }
     else
     {
-        <h3>Posts not Found</h3>
+        <h3>Todos not Found</h3>
     }
 </div>

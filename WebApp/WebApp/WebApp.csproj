@@ -17,4 +17,10 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Todos\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>
