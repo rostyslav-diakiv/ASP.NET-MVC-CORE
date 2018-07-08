@@ -50,7 +50,7 @@
                         @Html.DisplayNameFor(model => model.TodoModels)
                     </dt>
                     <dd>
-                        <a asp-controller="Posts" asp-action="Index" asp-route-userid="@Model.Id">
+                        <a asp-controller="Todos" asp-action="Index" asp-route-userid="@Model.Id">
                             @Html.DisplayFor(model => model.TodoModels.Count)
                         </a>
                     </dd>
