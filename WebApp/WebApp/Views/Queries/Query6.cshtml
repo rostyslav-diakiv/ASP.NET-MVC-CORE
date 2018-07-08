@@ -1,0 +1,56 @@
+﻿@model WebApp.Dtos.Query6Model
+
+@{
+    ViewData["Title"] = "Query6";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Query #6</h2>
+        <div>
+            <form asp-controller="Queries" asp-action="Query6" , method="get">
+                <p>
+                    @Html.TextBox("stringId")
+                    <input type="submit" value="Post Id" />
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+      
+        <div>
+            @if (Model != null)
+            {
+                <div>
+                    <h5>User Id: @ViewData["UserId"]</h5>
+                </div>
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            @Html.Partial("Partials/PostPartial", Model.Post)
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-primary">
+                                @Html.DisplayNameFor(model => model.CommentsAmount): @Html.DisplayFor(model => model.CommentsAmount)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            @Html.Partial("Partials/CommentPartial", Model.LongestComment)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.Partial("Partials/CommentPartial", Model.MostPopularComment)
+                        </div>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>User with such Id not Found!</p>
+            }
+        </div>  
+
+    </div>
+</div>

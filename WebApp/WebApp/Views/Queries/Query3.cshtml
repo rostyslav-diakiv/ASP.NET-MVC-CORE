@@ -1,0 +1,59 @@
+﻿@model List<Tuple<int, string>>
+@{
+    ViewData["Title"] = "Query3";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Query #3</h2>
+
+<form asp-controller="Queries" asp-action="Query3" , method="get">
+    <p>
+        @*User id: <input type="number" name="userId">*@
+        @Html.TextBox("stringId")
+        <input type="submit" value="User Id" />
+    </p>
+</form>
+
+@if (Model != null)
+{
+
+    <h5>User Id: @ViewData["UserId"]</h5>
+
+    if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Todo Id
+                    </th>
+                    <th>
+                        Todo Name
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => t.Item1)
+                        </td>
+                        <td>
+                            <a asp-controller="Todos" asp-action="Details" asp-route-id="@t.Item1">@Html.DisplayFor(modelItem => t.Item2)</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>User doesn't have any Completed Todos</p>
+    }
+}
+else
+{
+    <p>User with such id not found!</p>
+}
+

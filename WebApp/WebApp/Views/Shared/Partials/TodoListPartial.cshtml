@@ -1,0 +1,48 @@
+﻿@model List<WebApp.Models.TodoModel>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => @Model[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => @Model[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => @Model[0].CreatedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => @Model[0].IsComplete)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in @Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => t.Id)
+                    </td>
+                    <td>
+                        <a asp-controller="Todos" asp-action="Details" asp-route-id="@t.Id">@Html.DisplayFor(modelItem => t.Name)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => t.CreatedAt)
+                    </td>
+                    <td>
+                        @if (t.IsComplete)
+                        {
+                            <p>Completed</p>
+                        }
+                        else
+                        {
+                            <p>Not completed</p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

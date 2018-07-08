@@ -1,0 +1,38 @@
+﻿
+@model List<CommentModel>
+
+@{
+    ViewData["Title"] = "Query2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Query #2</h2>
+
+<form asp-controller="Queries" asp-action="Query2" , method="get">
+    <p>
+        @*User id: <input type="number" name="userId">*@
+        @Html.TextBox("stringId")
+        <input type="submit" value="User Id" />
+    </p>
+</form>
+
+@if (@Model != null)
+{
+    <div>
+        <h5>User Id: @ViewData["UserId"]</h5>
+    </div>
+
+    if (Model.Any())
+    {
+        @Html.Partial("Partials/CommentListPartial", @Model)
+    }
+    else
+    {
+        <p>User don't have any comments with length more that 50 chars!</p>
+    }
+}
+else
+{
+    <p>User with such id not found!</p>
+}
+

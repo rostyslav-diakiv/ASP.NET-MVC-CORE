@@ -1,0 +1,14 @@
+﻿@model WebApp.Entities.Post
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Post Details</h2>
+
+<div>
+
+    @Html.Partial("Partials/PostPartial", @Model)
+
+</div>

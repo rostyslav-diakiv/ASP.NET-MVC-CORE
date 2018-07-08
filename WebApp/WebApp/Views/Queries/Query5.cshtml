@@ -1,0 +1,53 @@
+﻿@model WebApp.Dtos.Query5Model
+
+@{
+    ViewData["Title"] = "Query5";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div>
+            <h2>Query #5</h2>
+
+            <form asp-controller="Queries" asp-action="Query5" , method="get">
+                <p>
+                    @Html.TextBox("stringId")
+                    <input type="submit" value="User Id" />
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            @if (Model != null)
+            {
+                <div>
+                    <h5>User Id: @ViewData["UserId"]</h5>
+                </div>
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            @Html.Partial("Partials/UserPartial", Model.User)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.Partial("Partials/PostPartial", Model.LastPost)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.Partial("Partials/PostPartial", Model.MostPopularPost)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.Partial("Partials/PostPartial", Model.MostPopularPostLikes)
+                        </div>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>User with such Id not Found!</p>
+            }
+        </div>
+    </div>
+</div>

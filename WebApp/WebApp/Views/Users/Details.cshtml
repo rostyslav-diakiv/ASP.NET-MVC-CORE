@@ -1,0 +1,17 @@
+﻿@model WebApp.Entities.User
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="container">
+    @await Html.PartialAsync("Partials/UserPartial", @Model).ConfigureAwait(false)
+</div>
+
+
+<div>
+    <a asp-controller="Queries" asp-action="Query4">Go to User List</a>
+</div>

@@ -1,0 +1,48 @@
+﻿@model List<Tuple<WebApp.Entities.Post, int>>
+
+@{
+    ViewData["Title"] = "Query #1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Query #1</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <form asp-controller="Queries" asp-action="Query1" , method="get">
+                <div class="input-group mb-3">
+                    @Html.TextBox("stringId", null, htmlAttributes: new { placeholder = "User Id", @class = "form-control" })
+                    <div class="input-group-addon">
+                        <input type="submit" value="User Id" class="btn btn-default" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+
+            @if (@Model != null)
+            {
+                <h5>User Id: @ViewData["UserId"]</h5>
+
+                if (@Model.Any())
+                {
+                    @Html.Partial("Partials/PostListPartial", Model.Select(p => p.Item1).ToList())
+                }
+                else
+                {
+                    <p>User don't have any posts!</p>
+                }
+            }
+            else
+            {
+                <p>User with such id not found!</p>
+            }
+        </div>
+    </div>
+</div>

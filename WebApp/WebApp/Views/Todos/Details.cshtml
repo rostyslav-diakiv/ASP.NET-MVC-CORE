@@ -1,0 +1,56 @@
+﻿@model WebApp.Models.TodoModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h4>TodoModel</h4>
+            <hr />
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.Id): @Html.DisplayFor(model => model.Id)
+            </div>
+
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.Name):
+                <a href="#">
+                    @Html.DisplayFor(model => model.Name)
+                </a>
+            </div>
+
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.CreatedAt): @Html.DisplayFor(model => model.CreatedAt)
+            </div>
+
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.IsComplete):
+                @if (Model.IsComplete)
+                {
+                    <span>Completed</span>
+                }
+                else
+                {
+                    <span>Not completed</span>
+                }
+            </div>
+
+            <div class="text-primary">
+                @Html.DisplayNameFor(model => model.User.Name):
+                <a asp-controller="Users" asp-action="Details" asp-route-id="@Model.UserId">
+                    @Html.DisplayFor(model => model.User.Name)
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
