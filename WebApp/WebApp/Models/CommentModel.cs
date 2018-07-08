@@ -2,6 +2,7 @@
 
 namespace WebApp.Models
 {
+    using WebApp.Entities;
     using WebApp.Interfaces;
 
     public class CommentModel : ICommentModel
@@ -12,8 +13,11 @@ namespace WebApp.Models
         public int Id { get; set; }
 
         public int PostId { get; set; }
+        public Post Post { get; set; }
 
         public int UserId { get; set; }
+
+        public User User { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

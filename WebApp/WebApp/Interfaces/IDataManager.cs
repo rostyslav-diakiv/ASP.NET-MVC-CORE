@@ -2,8 +2,10 @@
 
 namespace WebApp.Interfaces
 {
+    using WebApp.Entities;
+
     public interface IDataManager
     {
-        List<IUser> Users { get; }
+        List<User> Users { get; }
     }
 }

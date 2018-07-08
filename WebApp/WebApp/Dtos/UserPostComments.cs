@@ -2,17 +2,17 @@
 
 namespace WebApp.Dtos
 {
-    using WebApp.Interfaces;
+    using WebApp.Entities;
 
     public class UserPostComments
     {
-        public UserPostComments(int userId, IEnumerable<(IPost post, int comAnount)> postWithComments)
+        public UserPostComments(int userId, IEnumerable<(Post post, int comAnount)> postWithComments)
         {
             UserId = userId;
-            PostWithComments = new List<(IPost post, int comAnount)>(postWithComments);
+            PostWithComments = new List<(Post post, int comAnount)>(postWithComments);
         }
 
-        public List<(IPost post, int comAnount)> PostWithComments { get; set; }
+        public List<(Post post, int comAnount)> PostWithComments { get; set; }
 
         public int UserId { get; set; }
     }

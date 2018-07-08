@@ -14,7 +14,7 @@
 
     public class DataManager : IDataManager
     {
-        public List<IUser> Users { get; }
+        public List<User> Users { get; }
 
         public DataManager()
         {
@@ -57,17 +57,25 @@
             }
         }
 
-        private IEnumerable<IUser> CombineData((List<UserModel> userModels, List<PostModel> postModels, List<CommentModel> commentModels, List<TodoModel> todoModels) dataToCombine)
+        private IEnumerable<User> CombineData((List<UserModel> userModels, List<PostModel> postModels, List<CommentModel> commentModels, List<TodoModel> todoModels) dataToCombine)
         {
             var users = from um in dataToCombine.userModels
                         join p in (from pm in dataToCombine.postModels
                                 join cm in dataToCombine.commentModels on pm.Id equals cm.PostId into cms
                                 select new Post(pm, cms)) on um.Id equals p.UserId into ps
                         join tm in dataToCombine.todoModels on um.Id equals tm.UserId into tms
-                        select new User(um, tms, ps);
+                        join cm in dataToCombine.commentModels on um.Id equals cm.UserId into cms
+                        select new User(um, tms, ps, cms);
 
-            var combineData = users.ToList();
-            foreach (var u in combineData)
+            var data = LinkEntities(users);
+
+            return data;
+        }
+
+        private List<User> LinkEntities(IEnumerable<User> users)
+        {
+            var combinedData = users.ToList();
+            foreach (var u in combinedData)
             {
                 foreach (var p in u.Posts)
                 {
@@ -75,16 +83,17 @@
                     foreach (var c in p.Comments)
                     {
                         c.Post = p;
+                        c.User = combinedData.FirstOrDefault(us => us.Id == c.UserId);
                     }
                 }
 
                 foreach (var t in u.TodoModels)
                 {
-                    t.User = u;
+                    t.User = u; // +
                 }
             }
 
-            return combineData;
+            return combinedData;
         }
     }
 }

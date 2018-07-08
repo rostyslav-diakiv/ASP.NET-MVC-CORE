@@ -9,12 +9,12 @@
     {
         public Post(): base() { }
 
-        public Post(IPostModel postModel, IEnumerable<ICommentModel> comments) : base(postModel)
+        public Post(PostModel postModel, IEnumerable<CommentModel> comments) : base(postModel)
         {
-            Comments = new List<ICommentModel>(comments);
+            Comments = new List<CommentModel>(comments);
         }
 
-        public List<ICommentModel> Comments { get; set; }
+        public List<CommentModel> Comments { get; set; }
 
         public User User { get; set; }
 
