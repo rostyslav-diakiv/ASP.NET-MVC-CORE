@@ -16,55 +16,23 @@
     </p>
 </form>
 
-<h6>@Html.DisplayNameFor(model => model[0].UserId)</h6>
-<h6>@Html.DisplayFor(model => model[0].UserId)</h6>
+@if (@Model != null)
+{
+    <div>
+        <h5>User Id: @ViewData["UserId"]</h5>
+    </div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Post.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].User.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Likes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Body)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var com in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => com.Id)
-                </td>
-                <td>
-                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@com.PostId">@Html.DisplayFor(modelItem => com.Post.Title)</a>
-                </td>
-                <td>
-                    <a asp-controller="Users" asp-action="Details" asp-route-id="@com.UserId">@Html.DisplayFor(modelItem => com.User.Name)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => com.CreatedAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => com.Likes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => com.Body)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    if (Model.Any())
+    {
+        @Html.Partial("Partials/CommentListPartial", @Model)
+    }
+    else
+    {
+        <p>User don't have any comments with length more that 50 chars!</p>
+    }
+}
+else
+{
+    <p>User with such id not found!</p>
+}
+

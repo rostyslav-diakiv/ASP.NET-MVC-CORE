@@ -19,23 +19,32 @@ namespace WebApp.Controllers
         {
             if (int.TryParse(stringId, out var id))
             {
-                var tuples = _queryService.GetUserPostsCommentsNumber(id).ToList();
-                return View(tuples);
+                ViewData["UserId"] = id;
+
+                var tuples = _queryService.GetUserPostsCommentsNumber(id);
+                if (tuples != null)
+                {
+                    return View(tuples.ToList());
+                }
             }
 
-            return NotFound();
+            return View(null);
         }
 
         public IActionResult Query2(string stringId)
         {
             if (int.TryParse(stringId, out var id))
             {
-                // User' Post's all Comments
-                var comments = _queryService.GetUserPostsComments(id); // 24
-                return View(comments.ToList());
+                ViewData["UserId"] = id;
+
+                var comments = _queryService.GetUserPostsComments(id);
+                if (comments != null)
+                {
+                    return View(comments.ToList());
+                }
             }
 
-            return NotFound();
+            return View(null);
         }
 
         public IActionResult Query3(string stringId)
@@ -45,11 +54,14 @@ namespace WebApp.Controllers
                 ViewData["UserId"] = id;
 
                 var todos = _queryService.GetUserCompletedTodos(id);
-                return View(todos.ToList());
+                if (todos != null)
+                {
+                    return View(todos.ToList());
+                }
 
             }
 
-            return NotFound();
+            return View(null);
         }
 
         public IActionResult Query4()
@@ -57,26 +69,38 @@ namespace WebApp.Controllers
             return View(_queryService.Query4().ToList());
         }
 
+
+        // TODO :Test wrong Id
         public IActionResult Query5(string stringId)
         {
             if (int.TryParse(stringId, out var id))
             {
+                ViewData["UserId"] = id;
+
                 var model = _queryService.Query5(id);
-                return View(model); // TODO: Add validation for null
+                if (model.User != null)
+                {
+                    return View(model);
+                }
             }
 
-            return NotFound();
+            return View(null);
         }
 
         public IActionResult Query6(string stringId)
-        {
+        { 
             if (int.TryParse(stringId, out var id))
             {
+                ViewData["PostId"] = id;
+
                 var model = _queryService.Query6(id);
-                return View(model); // TODO: Add validation for null
+                if (model.Post != null)
+                {
+                    return View(model);
+                }
             }
 
-            return NotFound();
+            return View(null);
         }
     }
 }

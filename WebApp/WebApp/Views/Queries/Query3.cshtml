@@ -14,33 +14,46 @@
     </p>
 </form>
 
-<h5>User Id:</h5>
-<h5>@ViewData["UserId"]</h5>
+@if (Model != null)
+{
 
+    <h5>User Id: @ViewData["UserId"]</h5>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model[0].Item1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model[0].Item2)
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var t in Model)
+    if (Model.Any())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(m => t.Item1)
-            </td>
-            <td>
-                <a asp-controller="Todos" asp-action="Details" asp-route-id="@t.Item1">@Html.DisplayFor(modelItem => t.Item2)</a>
-            </td>
-        </tr>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Todo Id
+                    </th>
+                    <th>
+                        Todo Name
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => t.Item1)
+                        </td>
+                        <td>
+                            <a asp-controller="Todos" asp-action="Details" asp-route-id="@t.Item1">@Html.DisplayFor(modelItem => t.Item2)</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
-    </tbody>
-</table>
+    else
+    {
+        <p>User doesn't have any Completed Todos</p>
+    }
+}
+else
+{
+    <p>User with such id not found!</p>
+}
 

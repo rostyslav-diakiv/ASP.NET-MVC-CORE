@@ -10,15 +10,15 @@
             LastPost = tuple.lastPost;
             LastPostCommentsAmount = tuple.lastPostCommentsAmount;
             UncompletedTasksAmount = tuple.uncompletedTasksAmount;
-            MostPolularPost = tuple.popPost;
-            MostPolularPostLikes = tuple.popPostLikes;
+            MostPopularPost = tuple.popPost;
+            MostPopularPostLikes = tuple.popPostLikes;
         }
 
         public User User { get; set; }
         public Post LastPost { get; set; }
         public int? LastPostCommentsAmount { get; set; }
         public int UncompletedTasksAmount { get; set; }
-        public Post MostPolularPost { get; set; }
-        public Post MostPolularPostLikes { get; set; }
+        public Post MostPopularPost { get; set; }
+        public Post MostPopularPostLikes { get; set; }
     }
 }

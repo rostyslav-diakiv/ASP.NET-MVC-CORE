@@ -1,0 +1,82 @@
+﻿@model List<WebApp.Entities.Post>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Id) @*PostId*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Likes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Body)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].User.Name)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => p.Id)
+                </td>
+                <td>
+                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@p.Id">@Html.DisplayFor(modelItem => p.Title)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => p.Likes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => p.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => p.Body)
+                </td>
+                <td>
+                    @if (p.Comments.Any())
+                    {
+                        <a class="btn btn-primary"
+                           data-toggle="collapse"
+                           href='@string.Format("#collapseComm{0}", p.Id)'
+                           role="button"
+                           aria-expanded="false"
+                           aria-controls='@string.Format("#collapseComm{0}", p.Id)'>
+
+                            @Html.DisplayFor(modelItem => p.Comments.Count)
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary disabled" href='#' role="button">
+                            @Html.DisplayFor(modelItem => p.Comments.Count)
+                        </a>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="Users" asp-action="Details" asp-route-id="@p.UserId">@Html.DisplayFor(model => p.User.Name)</a>
+                </td>
+            </tr>
+            if (p.Comments.Any())
+            {
+                <tr class="collapse" id='@string.Format("collapseComm{0}", p.Id)'>
+                    <td colspan="5">
+                        @Html.RenderPartialAsync("Partials/CommentListPartial", p.Comments)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

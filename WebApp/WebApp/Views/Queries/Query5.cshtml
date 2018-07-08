@@ -14,14 +14,15 @@
     </p>
 </form>
 
-<h6>@Html.DisplayNameFor(model => model.User.Id)</h6>
-<h6>@Html.DisplayFor(model => model.User.Id)</h6>
-
 <div>
-    <h4>User</h4>
-    <hr />
     @if (Model != null)
     {
+
+        
+        <div>
+            <h5>User Id: @ViewData["UserId"]</h5>
+        </div>
+
         <img src="@Model.User.Avatar" alt="User photo (Avatar)" />
         <dl class="dl-horizontal">
             <dt>
@@ -63,42 +64,39 @@
                 <div class="collapse" id='@string.Format("collapseTodos{0}", @Model.User.Id)'>
                     <table class="table table-striped">
                         <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => @Model.User.TodoModels[0].Id)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => @Model.User.TodoModels[0].Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => @Model.User.TodoModels[0].CreatedAt)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => @Model.User.TodoModels[0].IsComplete)
-                            </th>
-                        </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => @Model.User.TodoModels[0].Id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => @Model.User.TodoModels[0].Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => @Model.User.TodoModels[0].CreatedAt)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => @Model.User.TodoModels[0].IsComplete)
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @foreach (var t in @Model.User.TodoModels)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(m => t.Id)
-                                </td>
-                                <td>
-                                    <a asp-controller="Todos" asp-action="Details" asp-route-id="@t.Id">@Html.DisplayFor(modelItem => t.Name)</a>
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => t.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => t.CreatedAt)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => t.IsComplete)
-                                </td>
-                            </tr>
-                        }
+                            @foreach (var t in @Model.User.TodoModels)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(m => t.Id)
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Todos" asp-action="Details" asp-route-id="@t.Id">@Html.DisplayFor(modelItem => t.Name)</a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => t.CreatedAt)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => t.IsComplete)
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

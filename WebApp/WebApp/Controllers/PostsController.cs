@@ -14,6 +14,23 @@ namespace WebApp.Controllers
         }
 
         // GET: Posts/Details/5
+        public IActionResult Index(int? id) // userid
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var post = _queryService.GetPostById(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return View(post);
+        }
+
+        // GET: Posts/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)

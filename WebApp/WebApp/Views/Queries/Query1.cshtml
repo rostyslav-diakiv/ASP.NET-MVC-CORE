@@ -1,25 +1,12 @@
-﻿
-@using WebApp.Helpers
-@model List<Tuple<WebApp.Entities.Post, int>>
+﻿@model List<Tuple<WebApp.Entities.Post, int>>
 
 @{
     ViewData["Title"] = "Query1";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{
-    string[] cities = new string[] { "Лондон", "Париж", "Берлин" };
-    string[] countries = new string[] { "Великобритания", "Франция", "Германия" };
-}
 <h2>Query #1</h2>
 
-@*<div>
-        @using (Html.BeginForm("Index", "Posts", FormMethod.Get))
-        {
-            @Html.TextBox("userId")
-            <input type="submit" value="User Id" />
-        }
-    </div>*@
 <form asp-controller="Queries" asp-action="Query1" , method="get">
     <p>
         @Html.TextBox("stringId")
@@ -28,118 +15,20 @@
     </p>
 </form>
 
-<h6>@Html.DisplayNameFor(model => model[0].Item1.UserId)</h6>
-<h6>@Html.DisplayFor(model => model[0].Item1.UserId)</h6>
+@if (@Model != null)
+{
+<h5>User Id: @ViewData["UserId"]</h5>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Item1.Id) @*PostId*@
-            </th>
-            <th>
-
-                @Html.DisplayNameFor(model => model[0].Item1.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Item1.Likes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Item1.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Item1.Body)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Item2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model[0].Item1.User.Name)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var tuple in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => tuple.Item1.Id)
-                </td>
-                <td>
-                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@tuple.Item1.Id">@Html.DisplayFor(modelItem => tuple.Item1.Title)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => tuple.Item1.Likes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => tuple.Item1.CreatedAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => tuple.Item1.Body)
-                </td>
-                <td>
-                    @*@Html.ActionLink(@item.comAnount.ToString(), new { @class = "btn btn-primary", datatoggle = "collapse", href = "#collapseExample", role = "button" })*@
-                    <a class="btn btn-primary" data-toggle="collapse" href='@string.Format("#collapseComm{0}", tuple.Item1.Id)' role="button" aria-expanded="false" aria-controls="collapseExample">
-                        @Html.DisplayFor(modelItem => tuple.Item2)
-                    </a>
-                </td>
-                <td>
-                    <a asp-controller="Users" asp-action="Details" asp-route-id="@tuple.Item1.UserId">@Html.DisplayFor(model => tuple.Item1.User.Name)</a>
-                </td>
-            </tr>
-            <tr class="collapse" id='@string.Format("collapseComm{0}", tuple.Item1.Id)'>
-                <td colspan="5">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => tuple.Item1.Comments[0].Id)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => tuple.Item1.Comments[0].Post.Title)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => tuple.Item1.Comments[0].User.Name)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => tuple.Item1.Comments[0].CreatedAt)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => tuple.Item1.Comments[0].Likes)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => tuple.Item1.Comments[0].Body)
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var com in tuple.Item1.Comments)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(m => com.Id)
-                                    </td>
-                                    <td>
-                                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@com.Post.Id">@Html.DisplayFor(modelItem => com.Post.Title)</a>
-                                    </td>
-                                    <td>
-                                        <a asp-controller="Users" asp-action="Details" asp-route-id="@com.UserId">@Html.DisplayFor(modelItem => com.User.Name)</a>
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => com.CreatedAt)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => com.Likes)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => com.Body)
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    if (@Model.Any())
+    {
+        @Html.Partial("Partials/PostListPartial", Model.Select(p => p.Item1).ToList())
+    }
+    else
+    {
+        <p>User don't have any posts!</p>
+    }
+}
+else
+{
+    <p>User with such id not found!</p>
+}
