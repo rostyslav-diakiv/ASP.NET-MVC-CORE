@@ -1,5 +1,4 @@
-﻿
-namespace WebApp.Interfaces
+﻿namespace WebApp.Interfaces
 {
     using System;
     using System.Collections.Generic;

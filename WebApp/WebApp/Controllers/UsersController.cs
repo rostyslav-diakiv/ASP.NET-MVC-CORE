@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
@@ -12,22 +11,6 @@ namespace WebApp.Controllers
         public UsersController(IQueryService queryService)
         {
             _queryService = queryService;
-        }
-
-        public IActionResult Query1(string userId)
-        {
-            if (int.TryParse(userId, out var id))
-            {
-                return View(_queryService.GetUserPostsCommentsNumber(id));
-
-            }
-
-            return NotFound();
-        }
-        // GET: User
-        public ActionResult Index()
-        {
-            return View();
         }
 
         // GET: User/Details/5

@@ -35,3 +35,7 @@ body {
         display: none;
     }
 }
+
+.page-item {
+    border: lightseagreen solid thin !important
+}

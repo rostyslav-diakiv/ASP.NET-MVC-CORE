@@ -69,8 +69,6 @@ namespace WebApp.Controllers
             return View(_queryService.Query4().ToList());
         }
 
-
-        // TODO :Test wrong Id
         public IActionResult Query5(string stringId)
         {
             if (int.TryParse(stringId, out var id))

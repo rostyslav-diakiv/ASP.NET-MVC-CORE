@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div>
             <form asp-controller="Queries" asp-action="Query3" , method="get">
                 @Html.TextBox("stringId", null, htmlAttributes: new { placeholder = "User Id" })
                 <input type="submit" value="Search" class="btn btn-default" />

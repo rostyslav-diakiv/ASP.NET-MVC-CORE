@@ -19,7 +19,7 @@ namespace WebApp.Services
             _dataManager = dataManager;
         }
 
-        #region Get Entity By Id
+        #region Get Entities By Id
 
         public Post GetPostById(int? id)
         {

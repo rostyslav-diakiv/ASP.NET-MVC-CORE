@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div>
             <form asp-controller="Queries" asp-action="Query6" , method="get">
                 <p>
                     @Html.TextBox("stringId", null, htmlAttributes: new { placeholder = "Post Id" })
@@ -26,14 +26,14 @@
         <div class="row">
             <h4>Post Id: @Model.Post.Id </h4>
         </div>
-        <div class="row" style="border: black solid thin">
+        <div class="row page-item">
             <div>
                 <h2>Post</h2>
 
                 @Html.Partial("Partials/PostPartial", Model.Post)
             </div>
         </div>
-        <div class="row" style="border: black solid thin">
+        <div class="row page-item">
             <div>
                 <h4>
                     Number of comments under the post where or 0 likes or text length < 80: @Html.DisplayFor(model => model.CommentsAmount)
@@ -42,13 +42,13 @@
         </div>
         if (Model.LongestComment != null)
         {
-            <div class="row" style="border: grey solid thin">
+            <div class="row page-item">
                 <div>
                     <h4>The Longest Post's Comment</h4>
                     @Html.Partial("Partials/CommentPartial", Model.LongestComment)
                 </div>
             </div>
-            <div class="row" style="border: black solid thin">
+            <div class="row page-item">
                 <div>
                     <h4>The Most popular Post's Comment</h4>
                     @Html.Partial("Partials/CommentPartial", Model.MostPopularComment)

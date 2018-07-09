@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div>
             <form asp-controller="Queries" asp-action="Query5" , method="get">
                 @Html.TextBox("stringId", null, htmlAttributes: new { placeholder = "User Id" })
                 <input type="submit" value="Search" class="btn btn-default" />
@@ -26,7 +26,7 @@
             <h3>User Id: @Model.User.Id </h3>
         </div>
 
-        <div class="row" style="border: black solid thin">
+        <div class="row page-item">
             <div>
                 <h3>User</h3>
 
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="row" style="border: black solid thin">
+        <div class="row page-item">
             <div>
                 <h3>
                     @Html.DisplayNameFor(m => Model.UncompletedTasksAmount): @Html.DisplayFor(m => Model.UncompletedTasksAmount)
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="row" style="border: black solid thin">
+        <div class="row page-item">
             <div>
                 <h3>
                     @Html.DisplayNameFor(m => Model.LastPostCommentsAmount): @Html.DisplayFor(m => Model.LastPostCommentsAmount)
@@ -50,21 +50,21 @@
             </div>
         </div>
 
-        <div class="row" style="border: black solid thin">
+        <div class="row page-item">
             <div>
                 <h4> @Html.DisplayNameFor(m => Model.LastPost)</h4>
                 @Html.Partial("Partials/PostPartial", Model.LastPost)
             </div>
         </div>
 
-        <div class="row" style="border: black solid thin">
+        <div class="row page-item">
             <div>
                 <h4> @Html.DisplayNameFor(m => Model.MostPopularPost)</h4>
                 @Html.Partial("Partials/PostPartial", Model.MostPopularPost)
             </div>
         </div>
 
-        <div class="row" style="border: black solid thin">
+        <div class="row page-item">
             <div>
                 <h4> @Html.DisplayNameFor(m => Model.MostPopularPostLikes)</h4>
                 @Html.Partial("Partials/PostPartial", Model.MostPopularPostLikes)
