@@ -15,6 +15,7 @@
     <div class="row">
         @if (Model.Comments.Any())
         {
+            <h4>Comments: </h4>
             <div>
                 @Html.Partial("Partials/CommentListPartial", Model.Comments)
             </div>

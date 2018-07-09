@@ -5,73 +5,84 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Query #4</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Query #4</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].Avatar) 
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].CreatedAt)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].TodoModels)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model)
-            {
-                <tr>
-                    <td>
-                        <img src="@user.Avatar" class="img-rounded" alt="User Avatar" />
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => user.Id)
-                    </td>
-                    <td>
-                        <a asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">@Html.DisplayFor(modelItem => user.Name)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => user.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => user.CreatedAt)
-                    </td>
-                    <td>
-                        @if (user.TodoModels.Any())
-                        {
-                            <a class="btn btn-primary" data-toggle="collapse" href='@string.Format("#collapseTodos{0}", user.Id)' role="button" aria-expanded="false" aria-controls="collapseExample">
-                                @Html.DisplayFor(modelItem => user.TodoModels.Count)
-                            </a>
-                        }
-                        else
-                        {
-                            <a class="btn btn-primary disabled" href='#' role="button">
-                                @Html.DisplayFor(modelItem => user.TodoModels.Count)
-                            </a>
-                        }
-                    </td>
-                </tr>
-                if (user.TodoModels.Any())
-                {
-                    <tr class="collapse" id='@string.Format("collapseTodos{0}", user.Id)'>
-                        <td colspan="5">
-                            @Html.Partial("Partials/TodoListPartial", user.TodoModels)
-                        </td>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Avatar)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].CreatedAt)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].TodoModels)
+                        </th>
                     </tr>
-                }
-            }
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@user.Avatar" class="img-rounded" alt="User Avatar" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => user.Id)
+                            </td>
+                            <td>
+                                <a asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">@Html.DisplayFor(modelItem => user.Name)</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => user.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => user.CreatedAt)
+                            </td>
+                            <td>
+                                @if (user.TodoModels.Any())
+                                {
+                                    <a class="btn btn-primary" data-toggle="collapse" href='@string.Format("#collapseTodos{0}", user.Id)' role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        @Html.DisplayFor(modelItem => user.TodoModels.Count)
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary disabled" href='#' role="button">
+                                        @Html.DisplayFor(modelItem => user.TodoModels.Count)
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                        if (user.TodoModels.Any())
+                        {
+                            <tr class="collapse" id='@string.Format("collapseTodos{0}", user.Id)'>
+                                <td colspan="5">
+                                    @Html.Partial("Partials/TodoListPartial", user.TodoModels)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

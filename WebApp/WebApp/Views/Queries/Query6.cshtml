@@ -7,12 +7,16 @@
 
 <div class="container">
     <div class="row">
-        <h2>Query #6</h2>
-        <div>
+        <div class="col-md-4">
+            <h2>Query #4</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
             <form asp-controller="Queries" asp-action="Query6" , method="get">
                 <p>
-                    @Html.TextBox("stringId")
-                    <input type="submit" value="Post Id" />
+                    @Html.TextBox("stringId", null, htmlAttributes: new { placeholder = "Post Id" })
+                    <input type="submit" value="Search" class="btn btn-default" />
                 </p>
             </form>
         </div>
@@ -20,7 +24,7 @@
     @if (Model != null)
     {
         <div class="row">
-            <h3>Post Id: @Model.Post.Id </h3>
+            <h4>Post Id: @Model.Post.Id </h4>
         </div>
         <div class="row" style="border: black solid thin">
             <div>
@@ -31,9 +35,9 @@
         </div>
         <div class="row" style="border: black solid thin">
             <div>
-                <h3>
-                    Количество комментов под постом где или 0 лайков или длина текста < 80: @Html.DisplayFor(model => model.CommentsAmount)
-                </h3>
+                <h4>
+                    Number of comments under the post where or 0 likes or text length < 80: @Html.DisplayFor(model => model.CommentsAmount)
+                </h4>
             </div>
         </div>
         if (Model.LongestComment != null)

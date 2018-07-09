@@ -1,6 +1,7 @@
 ﻿namespace WebApp.Entities
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using WebApp.Interfaces;
     using WebApp.Models;
@@ -24,8 +25,10 @@
 
         public List<Post> Posts { get; set; }
 
+        [Display(Name = "Todos")]
         public List<TodoModel> TodoModels { get; set; }
 
+        [Display(Name = "Comments")]
         public List<CommentModel> CommentsModels { get; set; }
 
         /// <summary>Returns a string that represents the current object.</summary>

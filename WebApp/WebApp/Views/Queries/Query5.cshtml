@@ -7,17 +7,19 @@
 
 <div class="container">
     <div class="row">
-        <div>
-            <h2>Query #5</h2>
-
+        <div class="col-md-4">
+            <h2>Query #4</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
             <form asp-controller="Queries" asp-action="Query5" , method="get">
-                <p>
-                    @Html.TextBox("stringId")
-                    <input type="submit" value="User Id" />
-                </p>
+                @Html.TextBox("stringId", null, htmlAttributes: new { placeholder = "User Id" })
+                <input type="submit" value="Search" class="btn btn-default" />
             </form>
         </div>
     </div>
+
     @if (Model != null)
     {
         <div class="row">
